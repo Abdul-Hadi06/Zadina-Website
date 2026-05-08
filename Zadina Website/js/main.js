@@ -5,6 +5,20 @@
    relevant DOM elements exist on the current page.
    ============================================================= */
 
+// ── Firebase: load the right module per page ─────────
+// nav-auth.js runs on every page (auth state + cart badge)
+// Skip on login page — auth.js handles everything there
+const _page = window.location.pathname.split('/').pop();
+if (_page !== 'login.html') {
+  import('./nav-auth.js').catch(console.error);
+}
+
+// Page-specific modules
+if (_page === 'login.html')    import('./auth.js').catch(console.error);
+if (_page === 'cart.html')     import('./cart.js').then(m => m.initCartPage()).catch(console.error);
+if (_page === 'checkout.html') import('./checkout.js').catch(console.error);
+if (_page === 'contact.html')  import('./contact.js').catch(console.error);
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ─────────────────────────────────────────────
@@ -144,48 +158,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ─────────────────────────────────────────────
      11. CONTACT FORM (contact.html)
+         NOTE: Firebase contact.js handles the real submission.
+         This fallback only runs on gift-options.html (no #firstName).
   ───────────────────────────────────────────── */
   const contactForm = document.querySelector('#contactForm');
-  if (contactForm) {
-    // gift-options.html version (simple alert)
-    if (!document.getElementById('firstName')) {
-      contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        alert('Thank you! Your message has been submitted.');
-        this.reset();
-      });
-    } else {
-      // contact.html version (inline success message)
-      contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var firstName = document.getElementById('firstName') ? document.getElementById('firstName').value.trim() : '';
-        var lastName  = document.getElementById('lastName')  ? document.getElementById('lastName').value.trim()  : '';
-        var email     = document.getElementById('email')     ? document.getElementById('email').value.trim()     : '';
-        if (!firstName || !lastName || !email) return;
-        this.reset();
-        var success = document.getElementById('formSuccess');
-        if (success) {
-          success.style.display = 'block';
-          setTimeout(function () { success.style.display = 'none'; }, 5000);
-        }
-      });
-    }
+  if (contactForm && !document.getElementById('firstName')) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Thank you! Your message has been submitted.');
+      this.reset();
+    });
   }
-
-  // contact.html standalone submitForm function (called via onsubmit="submitForm(event)")
-  window.submitForm = function (e) {
-    e.preventDefault();
-    var firstName = document.getElementById('firstName') ? document.getElementById('firstName').value.trim() : '';
-    var lastName  = document.getElementById('lastName')  ? document.getElementById('lastName').value.trim()  : '';
-    var email     = document.getElementById('email')     ? document.getElementById('email').value.trim()     : '';
-    if (!firstName || !lastName || !email) return;
-    if (contactForm) contactForm.reset();
-    var success = document.getElementById('formSuccess');
-    if (success) {
-      success.style.display = 'block';
-      setTimeout(function () { success.style.display = 'none'; }, 5000);
-    }
-  };
 
   /* ─────────────────────────────────────────────
      12. FAQ ACCORDION (faq.html)
@@ -248,120 +231,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ─────────────────────────────────────────────
      13. LOGIN / SIGNUP TOGGLE (login.html)
+         NOTE: Firebase auth.js handles real auth.
+         showAuth() is defined in auth.js.
+         No dummy handlers needed here.
   ───────────────────────────────────────────── */
-  window.showAuth = function (type) {
-    const login  = document.getElementById('login-container');
-    const signup = document.getElementById('signup-container');
-    if (!login || !signup) return;
-    if (type === 'signup') {
-      login.classList.add('hidden');
-      signup.classList.remove('hidden');
-    } else {
-      signup.classList.add('hidden');
-      login.classList.remove('hidden');
-    }
-    window.scrollTo(0, 0);
-  };
-
-  const loginBtn = document.getElementById('login-btn');
-  if (loginBtn) {
-    loginBtn.addEventListener('click', function () {
-      const email    = document.querySelector("#login-container input[type='email']");
-      const password = document.querySelector("#login-container input[type='password']");
-      if (!email || !password || !email.value.trim() || !password.value.trim()) {
-        alert('Please fill in both Email and Password');
-        return;
-      }
-      window.location.href = 'home.html';
-    });
-  }
-
-  const signupBtn = document.getElementById('signup-btn');
-  if (signupBtn) {
-    signupBtn.addEventListener('click', function () {
-      const name     = document.querySelector("#signup-container input[type='text']");
-      const email    = document.querySelector("#signup-container input[type='email']");
-      const password = document.querySelector("#signup-container input[type='password']");
-      const terms    = document.getElementById('terms');
-      if (!name || !email || !password || !name.value.trim() || !email.value.trim() || !password.value.trim()) {
-        alert('Please fill all fields');
-        return;
-      }
-      if (terms && !terms.checked) {
-        alert('You must agree to Terms & Privacy Policy');
-        return;
-      }
-      alert('Account created successfully! Please log in.');
-      window.showAuth('login');
-    });
-  }
-
-  const forgotPassword = document.getElementById('forgot-password');
-  if (forgotPassword) {
-    forgotPassword.addEventListener('click', function (e) {
-      e.preventDefault();
-      const email = prompt('Enter your email to reset password:');
-      if (!email) { alert('Email is required'); return; }
-      alert('A password reset link has been sent to: ' + email);
-    });
-  }
 
   /* ─────────────────────────────────────────────
-     14. CHECKOUT — payment toggle + discount + validation
+     14. CHECKOUT — payment toggle + discount
+         NOTE: Firebase checkout.js handles Pay Now + Firestore.
+         Only the payment field toggle stays here as a fallback.
   ───────────────────────────────────────────── */
-  // Payment method toggle
   const creditCardFields = document.getElementById('credit-card-fields');
   document.querySelectorAll('input[name="payment"]').forEach(radio => {
     radio.addEventListener('change', function () {
       if (creditCardFields) {
-        creditCardFields.style.display = document.getElementById('credit-card') && document.getElementById('credit-card').checked ? 'block' : 'none';
+        creditCardFields.style.display =
+          document.getElementById('credit-card')?.checked ? 'block' : 'none';
       }
     });
   });
-
-  // Discount code system
-  const applyBtns = document.querySelectorAll('.apply-btn, .apply-discount-btn');
-  const topDiscountInput    = document.querySelector('.discount-input');
-  const bottomDiscountInput = document.querySelector('.discount-code-input');
-
-  function applyDiscount(code) {
-    if (!code) return;
-    const c = code.toUpperCase().trim();
-    if (c === 'ZADINA10') {
-      alert('10% discount applied!');
-    } else if (c === 'WELCOME20') {
-      alert('20% discount applied!');
-    } else {
-      alert('Invalid discount code.');
-    }
-  }
-
-  applyBtns.forEach(button => {
-    button.addEventListener('click', () => {
-      const code = (topDiscountInput && topDiscountInput.value) ||
-                   (bottomDiscountInput && bottomDiscountInput.value) || '';
-      applyDiscount(code);
-    });
-  });
-
-  // Pay Now button
-  const payNowBtn = document.querySelector('.pay-now-btn');
-  if (payNowBtn) {
-    payNowBtn.addEventListener('click', () => {
-      const fields = [
-        document.querySelector('input[placeholder="First name"]'),
-        document.querySelector('input[placeholder="Last name"]'),
-        document.querySelector('input[placeholder="Email"]'),
-        document.querySelector('input[placeholder="Phone"]'),
-        document.querySelector('input[placeholder="Address"]'),
-        document.querySelector('input[placeholder="City"]')
-      ];
-      const empty = fields.some(f => !f || !f.value.trim());
-      if (empty) { alert('Please fill all required fields'); return; }
-      alert('Payment Successful! Thank you for your order.');
-      window.location.href = 'order-confirmation.html';
-    });
-  }
 
   /* ─────────────────────────────────────────────
      15. PERSONALISED GIFT BOXES (personalised-gift-boxes.html)
