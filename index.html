@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadina - Luxurious Dates and Chocolates</title>
+    <link rel="stylesheet" href="Zadina Website/css/home.css">
+    <link rel="stylesheet" href="Zadina Website/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="home.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="Zadina Website/pages/all-products.html">Shop</a>
+      <div class="dropdown-menu">
+        <a href="Zadina Website/pages/all-products.html">All Products</a>
+        <a href="Zadina Website/pages/everyday-gift-boxes.html">Everyday Gift Boxes</a>
+        <a href="Zadina Website/pages/luxury-gift-boxes.html">Luxury Gift Boxes</a>
+        <a href="Zadina Website/pages/our-favorites.html">Our Favorites</a>
+        <a href="Zadina Website/pages/everyday-dates.html">Everyday Dates</a>
+        <a href="Zadina Website/pages/gourmet-products.html">Gourmet Product</a>
+        <a href="Zadina Website/pages/chocolate-product.html">Chocolate product</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="Zadina Website/pages/about.html">About</a>
+      <div class="dropdown-menu">
+        <a href="Zadina Website/pages/learn-about-dates.html">Learn About Dates</a>
+        <a href="Zadina Website/pages/contact.html">Contact Us</a>
+        <a href="Zadina Website/pages/delivery.html">Shipping &amp; Delivery</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-logo">
+    <img src="Zadina Website/Home Page Assests/16.png" alt="Zadina Logo"/>
+  </div>
+
+  <div class="nav-right">
+    <a href="Zadina Website/pages/gift-options.html">Gift Options</a>
+    <a href="Zadina Website/pages/our-story.html">Our Story</a>
+    <div class="nav-icons">
+      <a href="Zadina Website/pages/search.html"><img class="search-icon" src="Zadina Website/Home Page Assests/17.png" alt="Search"/></a>
+      <a href="Zadina Website/pages/login.html"><img src="Zadina Website/Home Page Assests/18.png" alt="Account"/></a>
+      <a href="Zadina Website/pages/cart.html"><img src="Zadina Website/Home Page Assests/19.png" alt="Cart"/></a>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menus Overlay -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <button class="nav-mobile-close" id="navMobileClose" aria-label="Close menu">✕</button>
+  <span class="mobile-section-label">Navigate</span>
+  <a href="home.html">Home</a>
+  <a href="Zadina Website/pages/all-products.html">Shop – All Products</a>
+  <a href="Zadina Website/pages/everyday-gift-boxes.html">Everyday Gift Boxes</a>
+  <a href="Zadina Website/pages/luxury-gift-boxes.html">Luxury Gift Boxes</a>
+  <a href="Zadina Website/pages/our-favorites.html">Our Favorites</a>
+  <a href="Zadina Website/pages/everyday-dates.html">Everyday Dates</a>
+  <a href="Zadina Website/pages/gourmet-products.html">Gourmet Products</a>
+  <a href="Zadina Website/pages/chocolate-product.html">Chocolate Products</a>
+  <span class="mobile-section-label">About</span>
+  <a href="Zadina Website/pages/about.html">About Us</a>
+  <a href="Zadina Website/pages/learn-about-dates.html">Learn About Dates</a>
+  <a href="Zadina Website/pages/contact.html">Contact Us</a>
+  <a href="Zadina Website/pages/delivery.html">Shipping &amp; Delivery</a>
+  <span class="mobile-section-label">More</span>
+  <a href="Zadina Website/pages/gift-options.html">Gift Options</a>
+  <a href="Zadina Website/pages/our-story.html">Our Story</a>
+  <div class="mobile-icons">
+    <a href="Zadina Website/pages/search.html"><img src="Zadina Website/Home Page Assests/17.png" alt="Search"/></a>
+    <a href="Zadina Website/pages/login.html"><img src="Zadina Website/Home Page Assests/18.png" alt="Account"/></a>
+    <a href="Zadina Website/pages/cart.html"><img src="Zadina Website/Home Page Assests/19.png" alt="Cart"/></a>
+  </div>
+</div>
+<script>
+  (function(){
+    var btn = document.getElementById('navHamburger');
+    var menu = document.getElementById('navMobileMenu');
+    var close = document.getElementById('navMobileClose');
+    if(btn && menu){
+      btn.addEventListener('click', function(){ btn.classList.toggle('open'); menu.classList.toggle('open'); document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : ''; });
+      if(close) close.addEventListener('click', function(){ btn.classList.remove('open'); menu.classList.remove('open'); document.body.style.overflow = ''; });
+    }
+  })();
+</script>
+
+<!-- ════════════════ HERO BANNER ════════════════ -->
+<div class="hero">
+  <img src="Zadina Website/Home Page Assests/1.png" alt="Hero Banner"/>
+  <div class="hero-overlay"></div>
+  <a href="Zadina Website/pages/all-products.html" class="hero-btn">Visit Now</a>
+</div>
+
+<!-- ════════════════ COLLECTIONS ════════════════ -->
+<div class="sec" style="background:#F2F1EB;">
+  <div class="wrap">
+    <span class="sec-arrow">↓</span>
+    <h2 class="sec-title">Collections</h2>
+    <p class="sec-sub">
+      Our exclusive date boxes and treats are the ideal gifts! Perfect for sharing and enjoying
+      memorable moments with friends, family, and loved ones!
+    </p>
+    <div class="pills">
+      <button class="pill">All Products</button>
+      <button class="pill active">Ramadan Range</button>
+      <button class="pill">Everyday Dates</button>
+      <button class="pill">Gourmet Products</button>
+      <button class="pill">Luxury Gift Boxes</button>
+      <button class="pill">Everyday Gift Boxes</button>
+      <button class="pill">Show All</button>
+      <button class="pill">Chocolates</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ RAMADAN RANGE ════════════════ -->
+<div class="sec">
+  <div class="wrap">
+    <h2 class="sec-title">Ramadan Range</h2>
+    <div class="rmd-grid">
+
+      <!-- ROW 1 -->
+
+      <!-- Col 1: side card — Frame 518 -->
+      <div class="rmd-card">
+        <div class="rmd-card-title">Ramadan Chocolate Dates Gift Box<br/>with arabic cabinet design</div>
+        <p class="rmd-card-desc">
+          Spoil your friends and family this Ramadan with a gift that exudes luxury and craftsmanship. 
+          This exquisite chocolate dates gift box features premium dates covered in rich chocolate, 
+          presented in an elegant arabic cabinet design that reflects traditional Emirati artistry.
+          <a href="#">Read more</a>
+        </p>
+        <div class="rmd-card-img-wrap">
+          <img src="Zadina Website/Home Page Assests/3.png" alt="Ramadan Chocolate Dates Gift Box"/>
+          <span class="price-badge bottom-right">1055 د.إ</span>
+        </div>
+      </div>
+
+      <!-- Col 2: center card — Frame 520 (large, price top-right) -->
+      <div class="rmd-card-center">
+        <div class="rmd-card-img-wrap">
+          <img src="Zadina Website/Home Page Assests/5.png" alt="Ramadan Large Assorted Filled Dates Gift Box"/>
+          <span class="price-badge top-right">230 د.إ</span>
+        </div>
+        <div class="rmd-card-title">Ramadan Large Assorted Filled Dates Gift Box</div>
+        <p class="rmd-card-desc">
+          Treat your friends, family, or neighbors to the elegance and generosity of Zadina's Ramadan large assorted filled dates gift box. <a href="#">Read more</a>
+        </p>
+      </div>
+
+      <!-- Col 3: side card — Frame 519 -->
+      <div class="rmd-card">
+        <div class="rmd-card-title">Ramadan Small Assorted Filled Dates Gift Box</div>
+        <p class="rmd-card-desc">
+          Spoil your friends and family this Ramadan with a gift that gourmet fillings. 
+          This compact yet elegant gift box contains a carefully selected assortment of premium dates,
+          each filled with delicious gourmet ingredients that create a perfect balance of flavors.
+          <a href="#">Read more</a>
+        </p>
+        <div class="rmd-card-img-wrap">
+          <img src="Zadina Website/Home Page Assests/7.png" alt="Ramadan Small Assorted Filled Dates Gift Box"/>
+          <span class="price-badge bottom-right">175 د.إ</span>
+        </div>
+      </div>
+
+      <!-- ROW 2 -->
+
+      <!-- Col 1: side card — Frame 521 -->
+      <div class="rmd-card">
+        <div class="rmd-card-title">Ramadan Stuffed Dates Sleeve Gift Box</div>
+        <p class="rmd-card-desc">
+          Experience the same artisanal excellence and generosity of Zadina's Ramadan collection
+          in a refined, slender silhouette. This sophisticated sleeve gift box features hand-stuffed 
+          dates with premium fillings, perfect for intimate gatherings and personal gifting moments.
+          <a href="#">Read more</a>
+        </p>
+        <div class="rmd-card-img-wrap">
+          <img src="Zadina Website/Home Page Assests/4.png" alt="Ramadan Stuffed Dates Sleeve Gift Box"/>
+          <span class="price-badge bottom-right">85 د.إ</span>
+        </div>
+      </div>
+
+      <!-- Col 2: center card — Frame 522 (large, price top-right) -->
+      <div class="rmd-card-center">
+        <div class="rmd-card-img-wrap">
+          <img src="Zadina Website/Home Page Assests/6.png" alt="Ramadan Date Box With Butterfly Cabinet Design"/>
+          <span class="price-badge top-right">1075 د.إ</span>
+        </div>
+        <div class="rmd-card-title">Ramadan Date Box With Butterfly Cabinet Design</div>
+        <p class="rmd-card-desc">
+          Merging architectural precision with the spirit of Ramadan it is more than a gift,
+          it is a centerpiece of shared generosity. <a href="#">Read more</a>
+        </p>
+      </div>
+
+      <!-- Col 3: side card — Frame 517 -->
+      <div class="rmd-card">
+        <div class="rmd-card-title">Ramadan Crescent Assorted Date Box</div>
+        <p class="rmd-card-desc">
+          Merging architectural precision with the spirit of Ramadan selection of our finest hand-filled dates. 
+          This beautifully crafted crescent-shaped box showcases our premium assortment of hand-selected dates,
+          each carefully chosen for its exceptional quality and rich, natural sweetness.
+          <a href="#">Read more</a>
+        </p>
+        <div class="rmd-card-img-wrap">
+          <img src="Zadina Website/Home Page Assests/8.png" alt="Ramadan Crescent Assorted Date Box"/>
+          <span class="price-badge bottom-right">230 د.إ</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ FEATURED COLLECTION ════════════════ -->
+<div class="sec">
+  <div class="wrap">
+    <h2 class="feat-section-title">Featured Collection</h2>
+    <div class="feat-grid">
+
+      <!-- Image 1: Frame 512 -->
+      <div class="feat-card">
+        <div class="feat-card-name">UAE Logo Leather Box<br/>With Assorted Dates</div>
+        <img class="feat-card-img" src="Zadina Website/Home Page Assests/9.png" alt="UAE Logo Leather Box With Assorted Dates"/>
+        <div class="feat-card-bottom">
+          <span class="feat-card-price">د.إ 75</span>
+          <a href="Zadina Website/pages/all-products.html" class="feat-explore-btn">Explore More</a>
+        </div>
+      </div>
+
+      <!-- Image 2: Frame 513 -->
+      <div class="feat-card">
+        <div class="feat-card-name">Premium Emirati Kholas Dates</div>
+        <img class="feat-card-img" src="Zadina Website/Home Page Assests/10.png" alt="Premium Emirati Kholas Dates"/>
+        <div class="feat-card-bottom">
+          <span class="feat-card-price">د.إ 75</span>
+          <a href="Zadina Website/pages/all-products.html" class="feat-explore-btn">Explore More</a>
+        </div>
+      </div>
+
+      <!-- Image 3: Frame 515 -->
+      <div class="feat-card">
+        <div class="feat-card-name">Gourmet 6-Piece Mini Date Halwa Set</div>
+        <img class="feat-card-img" src="Zadina Website/Home Page Assests/11.png" alt="Gourmet 6-Piece Mini Date Halwa Set"/>
+        <div class="feat-card-bottom">
+          <span class="feat-card-price">د.إ 38/500g</span>
+          <a href="Zadina Website/pages/all-products.html" class="feat-explore-btn">Explore More</a>
+        </div>
+      </div>
+
+      <!-- Image 4: Frame 514 -->
+      <div class="feat-card">
+        <div class="feat-card-name">Natural Emarati date halwa</div>
+        <img class="feat-card-img" src="Zadina Website/Home Page Assests/12.png" alt="Natural Emarati date halwa"/>
+        <div class="feat-card-bottom">
+          <span class="feat-card-price">د.إ 40</span>
+          <a href="Zadina Website/pages/all-products.html" class="feat-explore-btn">Explore More</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ CORPORATE GIFT BOXES ════════════════ -->
+<div class="corp-section">
+  <div class="corp-grid">
+
+    <!-- LEFT: image + Go Beyond text -->
+    <div class="corp-left">
+      <img class="corp-left-img" src="Zadina Website/Home Page Assests/13.png" alt="Corporate Gift Boxes"/>
+      <h3>Go Beyond the Ordinary</h3>
+      <div class="corp-left-item">
+        <p class="item-label">Try our <a href="Zadina Website/pages/personalised-gift-boxes.html">thoughtful gift boxes</a></p>
+        <p class="item-desc">Each one curated to make a lasting impression that speaks from the heart.</p>
+      </div>
+      <div class="corp-left-item">
+        <p class="item-label">Try our <a href="Zadina Website/pages/everyday-gift-boxes.html">sustainable gift collection</a></p>
+        <p class="item-desc">Craving something with deeper purpose? Our <a href="Zadina Website/pages/everyday-gift-boxes.html">sustainable gift collection</a> blends eco-conscious values with refined elegance.</p>
+      </div>
+    </div>
+
+    <!-- CENTER: title + text + explore link -->
+    <div class="corp-center">
+      <h2>Corporate<br/>Gift Boxes</h2>
+      <p>
+        Impress your clients and colleagues with Zadina's corporate gifts, designed to
+        elevate your corporate gifting.
+      </p>
+      <p>
+        Featuring corporate chocolate gift boxes and luxury corporate gifts, these carefully
+        curated packages offer a perfect blend of sophistication and taste. Stop looking for
+        corporate gift box ideas. With Zadina, you'll have a gift designed to help you stand out!
+      </p>
+      <a href="Zadina Website/pages/luxury-gift-boxes.html" class="corp-explore">Explore Now ↗</a>
+    </div>
+
+    <!-- RIGHT: tall image in rounded card -->
+    <div class="corp-right">
+      <img src="Zadina Website/Home Page Assests/14.png" alt="Corporate Gift Box Product"/>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════ PROUDLY EMIRATI ════════════════ -->
+<div class="emirati-section">
+  <div class="emirati-grid">
+    <div class="emirati-img">
+      <img src="Zadina Website/Home Page Assests/15.png" alt="Proudly Emirati"/>
+    </div>
+    <div class="emirati-txt">
+      <h2>Proudly Emirati</h2>
+      <p>
+        We are the ambassador of gourmet dates and date products in UAE. The best locally sourced
+        dates that are authentic, uniquely crafted &amp; artistically packaged.
+      </p>
+      <p>
+        From first seed to final fruit, we lovingly cultivate our dates throughout their lifecycle
+        to bring out the richest flavour profiles.
+      </p>
+      <a href="Zadina Website/pages/about.html" class="emirati-about">About Us ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container footer-grid">
+        <div class="f-info">
+            <img src="Zadina Website/Home Page Assests/16.png" alt="Zadina Logo" class="footer-logo-img"/>
+            <p>Dates are at the heart of all we do, a part of our art of living, a taste of our culture, a special gift coming from Nature and cultivated by Zadina.</p>
+            <p>Want to gift with purpose? Our commitment to the planet shines through in every detail, from eco-friendly practices to our sustainably crafted gifts.</p>
+            <div class="socials">
+                <i class="fab fa-x-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        <div class="f-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="Zadina Website/pages/search.html">Search</a></li>
+                <li><a href="Zadina Website/pages/about.html">About</a></li>
+                <li><a href="Zadina Website/pages/our-story.html">Our Story</a></li>
+            </ul>
+        </div>
+        <div class="f-links">
+            <h4>Shops</h4>
+            <ul>
+                <li><a href="Zadina Website/pages/all-products.html">All Products</a></li>
+                <li><a href="Zadina Website/pages/gift-options.html">Gift Boxes</a></li>
+                <li><a href="Zadina Website/pages/everyday-dates.html">Everyday Dates</a></li>
+                <li><a href="Zadina Website/pages/our-favorites.html">Our Favorites</a></li>
+            </ul>
+        </div>
+        <div class="f-links">
+            <h4>Customer Care</h4>
+            <ul>
+                <li><a href="Zadina Website/pages/checkout.html">My Orders</a></li>
+                <li><a href="Zadina Website/pages/contact.html">Contact</a></li>
+                <li><a href="Zadina Website/pages/delivery.html">Shipping &amp; Delivery</a></li>
+                <li><a href="Zadina Website/pages/learn-about-dates.html">Learn About Dates</a></li>
+                <li><a href="Zadina Website/pages/faq.html">FAQs</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-container">
+        <div class="footer-bottom">
+            <span>&copy; 2026 <a href="home.html">Zadina</a> | All Rights Reserved.</span>
+            <a href="#">Terms and Conditions, Policies and Legal Info</a>
+        </div>
+    </div>
+</footer>
+
+
+    <script type="module" src="Zadina Website/js/main.js"></script>
+</body>
+</html>
