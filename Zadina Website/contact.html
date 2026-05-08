@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -49,7 +49,48 @@
       <a href="cart.html"><img src="Home Page Assests/19.png" alt="Cart"/></a>
     </div>
   </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <button class="nav-mobile-close" id="navMobileClose" aria-label="Close menu">&#x2715;</button>
+  <span class="mobile-section-label">Navigate</span>
+  <a href="home.html">Home</a>
+  <a href="all-products.html">Shop &#8211; All Products</a>
+  <a href="everyday-gift-boxes.html">Everyday Gift Boxes</a>
+  <a href="luxury-gift-boxes.html">Luxury Gift Boxes</a>
+  <a href="our-favorites.html">Our Favorites</a>
+  <a href="everyday-dates.html">Everyday Dates</a>
+  <a href="gourmet-products.html">Gourmet Products</a>
+  <a href="chocolate-product.html">Chocolate Products</a>
+  <span class="mobile-section-label">About</span>
+  <a href="about.html">About Us</a>
+  <a href="learn-about-dates.html">Learn About Dates</a>
+  <a href="contact.html">Contact Us</a>
+  <a href="delivery.html">Shipping &amp; Delivery</a>
+  <span class="mobile-section-label">More</span>
+  <a href="gift-options.html">Gift Options</a>
+  <a href="our-story.html">Our Story</a>
+  <div class="mobile-icons">
+    <a href="search.html"><img src="Home Page Assests/17.png" alt="Search"/></a>
+    <a href="login.html"><img src="Home Page Assests/18.png" alt="Account"/></a>
+    <a href="cart.html"><img src="Home Page Assests/19.png" alt="Cart"/></a>
+  </div>
+</div>
+<script>
+  (function(){
+    var btn = document.getElementById('navHamburger');
+    var menu = document.getElementById('navMobileMenu');
+    var close = document.getElementById('navMobileClose');
+    if(btn && menu){
+      btn.addEventListener('click', function(){ btn.classList.toggle('open'); menu.classList.toggle('open'); document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : ''; });
+      if(close) close.addEventListener('click', function(){ btn.classList.remove('open'); menu.classList.remove('open'); document.body.style.overflow = ''; });
+    }
+  })();
+</script>
 
 <!-- ════ CONTACT CONTENT ════ -->
 <div class="contact-wrap">
