@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luxury Gift Boxes – Zadina</title>
+  <link rel="stylesheet" href="../css/luxury-gift-boxes.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+    <!-- ════════════════ NAV ════════════════ -->
+<nav>
+  <div class="nav-left">
+    <a href="../home.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="all-products.html">Shop</a>
+      <div class="dropdown-menu">
+        <a href="all-products.html">All Products</a>
+        <a href="everyday-gift-boxes.html">Everyday Gift Boxes</a>
+        <a href="luxury-gift-boxes.html">Luxury Gift Boxes</a>
+        <a href="our-favorites.html">Our Favorites</a>
+        <a href="everyday-dates.html">Everyday Dates</a>
+        <a href="gourmet-products.html">Gourmet Product</a>
+        <a href="chocolate-product.html">Chocolate product</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="about.html">About</a>
+      <div class="dropdown-menu">
+        <a href="learn-about-dates.html">Learn About Dates</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="delivery.html">Shipping &amp; Delivery</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-logo">
+    <img src="../Home Page Assests/16.png" alt="Zadina Logo"/>
+  </div>
+
+  <div class="nav-right">
+    <a href="gift-options.html">Gift Options</a>
+    <a href="our-story.html">Our Story</a>
+    <div class="nav-icons">
+      <a href="search.html"><img class="search-icon" src="../Home Page Assests/17.png" alt="Search"/></a>
+      <a href="login.html"><img src="../Home Page Assests/18.png" alt="Account"/></a>
+      <a href="cart.html"><img src="../Home Page Assests/19.png" alt="Cart"/></a>
+    </div>
+  </div>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <button class="nav-mobile-close" id="navMobileClose" aria-label="Close menu">&#x2715;</button>
+  <span class="mobile-section-label">Navigate</span>
+  <a href="../home.html">Home</a>
+  <a href="all-products.html">Shop &#8211; All Products</a>
+  <a href="everyday-gift-boxes.html">Everyday Gift Boxes</a>
+  <a href="luxury-gift-boxes.html">Luxury Gift Boxes</a>
+  <a href="our-favorites.html">Our Favorites</a>
+  <a href="everyday-dates.html">Everyday Dates</a>
+  <a href="gourmet-products.html">Gourmet Products</a>
+  <a href="chocolate-product.html">Chocolate Products</a>
+  <span class="mobile-section-label">About</span>
+  <a href="about.html">About Us</a>
+  <a href="learn-about-dates.html">Learn About Dates</a>
+  <a href="contact.html">Contact Us</a>
+  <a href="delivery.html">Shipping &amp; Delivery</a>
+  <span class="mobile-section-label">More</span>
+  <a href="gift-options.html">Gift Options</a>
+  <a href="our-story.html">Our Story</a>
+  <div class="mobile-icons">
+    <a href="search.html"><img src="../Home Page Assests/17.png" alt="Search"/></a>
+    <a href="login.html"><img src="../Home Page Assests/18.png" alt="Account"/></a>
+    <a href="cart.html"><img src="../Home Page Assests/19.png" alt="Cart"/></a>
+  </div>
+</div>
+<script>
+  (function(){
+    var btn = document.getElementById('navHamburger');
+    var menu = document.getElementById('navMobileMenu');
+    var close = document.getElementById('navMobileClose');
+    if(btn && menu){
+      btn.addEventListener('click', function(){ btn.classList.toggle('open'); menu.classList.toggle('open'); document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : ''; });
+      if(close) close.addEventListener('click', function(){ btn.classList.remove('open'); menu.classList.remove('open'); document.body.style.overflow = ''; });
+    }
+  })();
+</script>
+
+<section class="header-section">
+    <div class="header-content">
+      <h1>Luxury Gift Boxes</h1>
+      <p>Zadina's luxury gift boxes are the epitome of elegance and sophistication, designed to elevate your gifting experience. Whether it's a corporate event, a family celebration, or a personal milestone, Zadina's luxury gift boxes are perfect for making every occasion extraordinary.</p>
+      <p> Crafted to impress, these boxes not only showcase the richness of our products but also reflect a deep appreciation for luxury and taste. Choose Zadina to leave a lasting impression with every gift. Want to make your gift truly memorable? Discover the art of thoughtful gifting with our limited edition picks, featuring rare creations that leave a lasting mark.</p>
+    </div>
+    <div class="header-image">
+      <img src="../Luxury Gift Boxes Assets/1.png" alt="Luxury Gift Boxes">
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <div class="filter-left">
+      <button class="filter-button">Filter</button>
+      <p><b>13 products</b></p>
+    </div>
+    <div class="filter-right">
+      <p><b>Sort by:</b></p>
+      <select>
+        <option>Featured</option>
+      </select>
+    </div>
+  </div>
+
+  <section class="products-section">
+    <div class="products-row">
+      <div class="product-card">
+        <h3>Abu Dhabi Skyline Wooden Box With Assorted Dates</h3>
+        <img src="../Luxury Gift Boxes Assets/3.png" alt="">
+        <div class="price-explore">
+          <p>65د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Big Round Golden Resin Desert Tray & Emirati Date Set</h3>
+        <img src="../Luxury Gift Boxes Assets/4.png" alt="">
+        <div class="price-explore">
+          <p>2500د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Desert-Inspired Gold Resin Small Wooden Box</h3>
+        <img src="../Luxury Gift Boxes Assets/5.png" alt="">
+        <div class="price-explore">
+          <p>650د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Desert-Inspired Resin Wooden Tray With Assorted Dates</h3>
+        <img src="../Luxury Gift Boxes Assets/6.png" alt="">
+        <div class="price-explore">
+          <p>1850د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+    </div>
+    <div class="products-row">
+      <div class="product-card">
+        <h3>Dubai Skyline Wood Box</h3>
+        <img src="../Luxury Gift Boxes Assets/7.png" alt="">
+        <div class="price-explore">
+          <p>65د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Luxurious Camel Leather Ballotin Date Box</h3>
+        <img src="../Luxury Gift Boxes Assets/8.png" alt="">
+        <div class="price-explore">
+          <p>180د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Luxurious Camel Leather Large Wooden Date Box</h3>
+        <img src="../Luxury Gift Boxes Assets/9.png" alt="">
+        <div class="price-explore">
+          <p>1000د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Luxurious Camel Leather Round Date Box</h3>
+        <img src="../Luxury Gift Boxes Assets/2.png" alt="">
+        <div class="price-explore">
+          <p>1190د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+    </div>
+    <div class="products-row">
+      <div class="product-card">
+        <h3>Luxurious Camel Leather Small Wooden Date Box</h3>
+        <img src="../Luxury Gift Boxes Assets/10.png" alt="">
+        <div class="price-explore">
+          <p>740د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Luxury Camel Leather Hamper Dates Gift Set</h3>
+        <img src="../Luxury Gift Boxes Assets/11.png" alt="">
+        <div class="price-explore">
+          <p>2700د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Night Sky-Inspired Resin Wooden Box</h3>
+        <img src="../Luxury Gift Boxes Assets/12.png" alt="">
+        <div class="price-explore">
+          <p>945د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <h3>Resin Desert Round Tray & Emirati Date Set</h3>
+        <img src="../Luxury Gift Boxes Assets/13.png" alt="">
+        <div class="price-explore">
+          <p>1400د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+    </div>
+    <div class="products-row">
+      <div class="product-card">
+        <h3>Three-Layer Drawer Camel Leather Date Box</h3>
+        <img src="../Luxury Gift Boxes Assets/14.png" alt="">
+        <div class="price-explore">
+          <p>1050د.إ</p>
+          <button>Explore More</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════ FEATURED COLLECTION ════════════════ -->
+<div class="sec">
+  <div class="wrap">
+    <h2 class="feat-section-title">Featured Collection</h2>
+    <div class="feat-grid">
+
+      <div class="feat-card">
+        <div class="feat-card-name">UAE Logo Leather Box<br/>With Assorted Dates</div>
+        <img class="feat-card-img" src="../Chocolate Product Assets/18.png" alt="UAE Logo Leather Box"/>
+        <div class="feat-card-bottom">
+          <span class="feat-card-price">د.إ 75</span>
+          <a href="all-products.html" class="feat-explore-btn">Explore More</a>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-card-name">Premium Emirati Kholas Dates</div>
+        <img class="feat-card-img" src="../Chocolate Product Assets/19.png" alt="Premium Emirati Kholas Dates"/>
+        <div class="feat-card-bottom">
+          <span class="feat-card-price">د.إ 75</span>
+          <a href="all-products.html" class="feat-explore-btn">Explore More</a>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-card-name">Gourmet 6-Piece Mini Date Halwa Set</div>
+        <img class="feat-card-img" src="../Chocolate Product Assets/20.png" alt="Gourmet Mini Date Halwa Set"/>
+        <div class="feat-card-bottom">
+          <span class="feat-card-price">د.إ 38/500g</span>
+          <a href="all-products.html" class="feat-explore-btn">Explore More</a>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-card-name">Natural Emarati date halwa</div>
+        <img class="feat-card-img" src="../Chocolate Product Assets/21.png" alt="Natural Emarati date halwa"/>
+        <div class="feat-card-bottom">
+          <span class="feat-card-price">د.إ 40</span>
+          <a href="all-products.html" class="feat-explore-btn">Explore More</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ INFO CARDS ════════════════ -->
+<div class="info-cards">
+
+  <div class="info-card">
+    <div class="img-container">
+      <img src="../Chocolate Product Assets/22.png" alt="Our Mission">
+    </div>
+    <h3>Our Mission</h3>
+    <p>
+      We are ambassadors of the world's finest dates, offering a variety of Emirati gourmet delicacies. 
+      Our mission is to bring the best of dates to people around the world.
+    </p>
+    <a href="about.html" class="link-with-arrow">Discover Zadina &#x2197;</a>
+  </div>
+
+  <div class="info-card short-card">
+    <div class="img-container">
+      <img src="../Chocolate Product Assets/23.png" alt="Premium Dates">
+    </div>
+    <h3>Premium Dates</h3>
+    <p>
+      Zadina offers a wide variety of gourmet date product. Premium dates are combined with finest nuts, 
+      fruit, and chocolate, offering a unique taste experience.
+    </p>
+    <a href="../index.html" class="shop-now">Shop Now</a>
+  </div>
+
+  <div class="info-card">
+    <div class="img-container">
+      <img src="../Chocolate Product Assets/24.png" alt="Local Farms">
+    </div>
+    <h3>Local Farms</h3>
+    <p>
+      Zadina dates are grown on local farms using organic practices. Al Foah takes pride in its organic farm 
+      in the heart of Al Ain, the finest organic date farm in the world.
+    </p>
+    <a href="our-story.html" class="link-with-arrow">About Us &#x2197;</a>
+  </div>
+
+</div>
+  </section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container footer-grid">
+        <div class="f-info">
+            <img src="../Home Page Assests/16.png" alt="Zadina Logo" class="footer-logo-img"/>
+            <p>Dates are at the heart of all we do, a part of our art of living, a taste of our culture, a special gift coming from Nature and cultivated by Zadina.</p>
+            <p>Want to gift with purpose? Our commitment to the planet shines through in every detail, from eco-friendly practices to our sustainably crafted gifts.</p>
+            <div class="socials">
+                <i class="fab fa-x-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        <div class="f-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="../home.html">Home</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="our-story.html">Our Story</a></li>
+            </ul>
+        </div>
+        <div class="f-links">
+            <h4>Shops</h4>
+            <ul>
+                <li><a href="all-products.html">All Products</a></li>
+                <li><a href="gift-options.html">Gift Boxes</a></li>
+                <li><a href="everyday-dates.html">Everyday Dates</a></li>
+                <li><a href="our-favorites.html">Our Favorites</a></li>
+            </ul>
+        </div>
+        <div class="f-links">
+            <h4>Customer Care</h4>
+            <ul>
+                <li><a href="checkout.html">My Orders</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="delivery.html">Shipping &amp; Delivery</a></li>
+                <li><a href="learn-about-dates.html">Learn About Dates</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-container">
+        <div class="footer-bottom">
+            <span>&copy; 2026 <a href="../home.html">Zadina</a> | All Rights Reserved.</span>
+            <a href="#">Terms and Conditions, Policies and Legal Info</a>
+        </div>
+    </div>
+</footer>
+    <script src="../js/main.js"></script>
+</body>
+</html>
