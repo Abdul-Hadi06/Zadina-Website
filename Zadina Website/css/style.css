@@ -1,0 +1,12 @@
+body { font-family: Georgia, serif; background-color: #f2f1eb; margin: 0; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .header { text-align: center; margin-bottom: 40px; }
+    .header h1 { color: #cca95a; font-size: 48px; margin-bottom: 20px; }
+    .header p { color: #5a3010; font-size: 18px; font-style: italic; }
+    .nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+    .nav-card { background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+    .nav-card:hover { transform: translateY(-5px); }
+    .nav-card h3 { color: #2c1a0e; font-size: 24px; margin-bottom: 15px; }
+    .nav-card p { color: #666; margin-bottom: 20px; }
+    .nav-card a { display: inline-block; background: #b55325; color: white; padding: 10px 20px; text-decoration: none; border-radius: 25px; font-weight: bold; }
+    .nav-card a:hover { background: #8b3a1a; }

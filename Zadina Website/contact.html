@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us – Zadina</title>
+  <link rel="stylesheet" href="css/contact.css"/>
+  <link rel="stylesheet" href="css/footer.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- ════════════════ NAV ════════════════ -->
+<nav>
+  <div class="nav-left">
+    <a href="home.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="all-products.html">Shop</a>
+      <div class="dropdown-menu">
+        <a href="all-products.html">All Products</a>
+        <a href="everyday-gift-boxes.html">Everyday Gift Boxes</a>
+        <a href="luxury-gift-boxes.html">Luxury Gift Boxes</a>
+        <a href="our-favorites.html">Our Favorites</a>
+        <a href="everyday-dates.html">Everyday Dates</a>
+        <a href="gourmet-products.html">Gourmet Product</a>
+        <a href="chocolate-product.html">Chocolate product</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <a href="about.html">About</a>
+      <div class="dropdown-menu">
+        <a href="learn-about-dates.html">Learn About Dates</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="delivery.html">Shipping &amp; Delivery</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-logo">
+    <img src="Home Page Assests/16.png" alt="Zadina Logo"/>
+  </div>
+
+  <div class="nav-right">
+    <a href="gift-options.html">Gift Options</a>
+    <a href="our-story.html">Our Story</a>
+    <div class="nav-icons">
+      <a href="search.html"><img class="search-icon" src="Home Page Assests/17.png" alt="Search"/></a>
+      <a href="login.html"><img src="Home Page Assests/18.png" alt="Account"/></a>
+      <a href="cart.html"><img src="Home Page Assests/19.png" alt="Cart"/></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════ CONTACT CONTENT ════ -->
+<div class="contact-wrap">
+
+  <h1 class="contact-title">Contact us</h1>
+  <p class="contact-sub">
+    Do you have a question on our dates, we're here to help. Fill out the form below and
+    our team will be ready to assist!
+  </p>
+
+  <!-- Top divider -->
+  <div class="divider">
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+  </div>
+
+  <!-- Phone / Whatsapp / Email -->
+  <div class="contact-info">
+    <div class="contact-info-item">
+      <h4>Phone</h4>
+      <p>123-456-6767</p>
+    </div>
+    <div class="contact-info-item">
+      <h4>Whatsapp</h4>
+      <p>123-456-6767</p>
+    </div>
+    <div class="contact-info-item">
+      <h4>Email</h4>
+      <p>CustomerCare@Zadina.ae</p>
+    </div>
+  </div>
+
+  <!-- Bottom divider -->
+  <div class="divider">
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+  </div>
+
+  <!-- Contact Form -->
+  <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+    <div class="form-layout">
+
+      <!-- LEFT: fields -->
+      <div class="form-left">
+
+        <!-- Name (Required) -->
+        <div class="fg">
+          <label>Name <strong>(Required)</strong></label>
+          <div class="name-row">
+            <div class="fg">
+              <span class="sub-label">First Name</span>
+              <input type="text" id="firstName" placeholder="Name" required/>
+            </div>
+            <div class="fg">
+              <span class="sub-label">Last Name</span>
+              <input type="text" id="lastName" placeholder="Name" required/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="fg">
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="0501234567"/>
+        </div>
+
+        <!-- Email (Required) -->
+        <div class="fg">
+          <label>Email <strong>(Required)</strong></label>
+          <input type="email" id="email" placeholder="Email" required/>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: textarea -->
+      <div class="form-right">
+        <div class="fg" style="height:100%;">
+          <span class="desc-label">Description</span>
+          <textarea id="message" placeholder="Your message"></textarea>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Submit -->
+    <div class="form-submit-wrap">
+      <button type="submit" class="form-submit">Submit</button>
+    </div>
+
+    <!-- Success message -->
+    <div class="form-success" id="formSuccess">
+      ✓ Thank you! Your message has been sent. We'll get back to you shortly.
+    </div>
+  </form>
+
+  <!-- Our Boutiques -->
+<section class="map-section container">
+  <h2>Our Boutiques</h2>
+  <div class="map-embed">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.5!2d55.3!3d25.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDEyJzAwLjAiTiA1NcKwMTgnMDAuMCJF!5e0!3m2!1sen!2sae!4v1234567890"
+      width="100%" height="350" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+</div>
+
+  <!-- THREE INFO CARDS -->
+  <section class="info-banner-section">
+  <div class="info-cards">
+
+  <div class="info-card">
+    <img src="Learn About Dates Assets/8.png" alt="Our Mission">
+
+    <h3>Our Mission</h3>
+
+    <p>
+      We are ambassadors of the world's finest dates, offering a variety of Emirati gourmet delicacies. Our mission is to bring the best of dates to people around the world.
+    </p>
+
+    <a href="about.html">
+      Discover Zadina
+      <i class="fas fa-arrow-up-right-from-square"></i>
+    </a>
+  </div>
+
+  <div class="info-card">
+    <img src="Learn About Dates Assets/10.png" alt="Premium Dates">
+
+    <h3>Premium Dates</h3>
+
+    <p>
+      Zadina offers a wide variety of gourmet date product. Premium dates are combined with finest nuts, fruit, and chocolate, offering an unique taste experience.
+    </p>
+
+    <a href="index.html">
+      Shop Now
+      <i class="fas fa-arrow-up-right-from-square"></i>
+    </a>
+  </div>
+
+  <div class="info-card">
+    <img src="Learn About Dates Assets/9.png" alt="Local Farms">
+
+    <h3>Local Farms</h3>
+
+    <p>
+      Zadina dates are grown on local farms using organic practices. Al Foah takes pride in its organic farm in the heart of Al Ain, the finest organic date farm in the world.
+    </p>
+
+    <a href="our-story.html">
+      About Us
+      <i class="fas fa-arrow-up-right-from-square"></i>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container footer-grid">
+        <div class="f-info">
+            <img src="Home Page Assests/16.png" alt="Zadina Logo" class="footer-logo-img"/>
+            <p>Dates are at the heart of all we do, a part of our art of living, a taste of our culture, a special gift coming from Nature and cultivated by Zadina.</p>
+            <p>Want to gift with purpose? Our commitment to the planet shines through in every detail, from eco-friendly practices to our sustainably crafted gifts.</p>
+            <div class="socials">
+                <i class="fab fa-x-twitter"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        <div class="f-links">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="search.html">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="our-story.html">Our Story</a></li>
+            </ul>
+        </div>
+        <div class="f-links">
+            <h4>Shops</h4>
+            <ul>
+                <li><a href="all-products.html">All Products</a></li>
+                <li><a href="gift-options.html">Gift Boxes</a></li>
+                <li><a href="everyday-dates.html">Everyday Dates</a></li>
+                <li><a href="our-favorites.html">Our Favorites</a></li>
+            </ul>
+        </div>
+        <div class="f-links">
+            <h4>Customer Care</h4>
+            <ul>
+                <li><a href="checkout.html">My Orders</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="delivery.html">Shipping &amp; Delivery</a></li>
+                <li><a href="learn-about-dates.html">Learn About Dates</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-container">
+        <div class="footer-bottom">
+            <span>&copy; 2026 <a href="home.html">Zadina</a> | All Rights Reserved.</span>
+            <a href="#">Terms and Conditions, Policies and Legal Info</a>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="js/main.js"></script>
+</body>
+</html>

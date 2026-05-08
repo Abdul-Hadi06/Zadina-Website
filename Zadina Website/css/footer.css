@@ -1,0 +1,169 @@
+/* ===== FOOTER ===== */
+.footer {
+    background: #EDCFB0;
+    padding: 60px 0 0;
+    margin-top: 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    align-items: start;
+}
+
+.f-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-logo-img {
+    height: 80px;
+    width: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.f-info p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #7a3e1a;
+    margin-bottom: 12px;
+}
+
+.f-links h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #c8973a;
+    margin-bottom: 14px;
+}
+
+.f-links ul {
+    list-style: disc;
+    padding-left: 18px;
+}
+
+.f-links li {
+    margin-bottom: 9px;
+    font-size: 14px;
+    color: #7a3e1a;
+}
+
+.f-links li a {
+    color: #7a3e1a;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.f-links li a:hover { color: #3d1a00; }
+
+.socials {
+    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+}
+
+.socials i {
+    font-size: 26px;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.socials i:hover { color: #7a3e1a; }
+
+.footer-bottom {
+    border-top: 1px solid rgba(122,62,26,0.25);
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #7a3e1a;
+}
+
+.footer-bottom a {
+    color: #7a3e1a;
+    text-decoration: underline;
+}
+
+.footer-bottom a:hover { color: #3d1a00; }
+
+.footer-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 44px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablets (2-column layout) */
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+/* Small tablets */
+@media (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .f-info {
+        grid-column: span 2;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+    .footer {
+        padding: 40px 0 0;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .f-info {
+        grid-column: auto;
+    }
+
+    .footer-logo-img {
+        height: 65px;
+    }
+
+    .f-links h4 {
+        font-size: 15px;
+    }
+
+    .f-links li,
+    .f-info p {
+        font-size: 13px;
+    }
+
+    .socials i {
+        font-size: 22px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 400px) {
+    .footer-bottom {
+        font-size: 12px;
+        padding: 14px 0;
+    }
+
+    .footer-container {
+        padding: 0 20px;
+    }
+}
