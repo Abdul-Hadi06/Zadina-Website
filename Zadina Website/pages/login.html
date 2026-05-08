@@ -98,13 +98,13 @@
     <p class="subtitle">Welcome Back! Please login to your account</p>
     
     <div class="form-group">
-        <label>Email*</label>
-        <input type="email" placeholder="Enter your Email">
+        <label for="login-email">Email*</label>
+        <input type="email" id="login-email" placeholder="Enter your Email" autocomplete="email">
     </div>
     
     <div class="form-group">
-        <label>Password*</label>
-        <input type="password" placeholder="Enter your Password">
+        <label for="login-password">Password*</label>
+        <input type="password" id="login-password" placeholder="Enter your Password" autocomplete="current-password">
     </div>
 
     <div class="flex-row">
@@ -124,9 +124,7 @@
     </div>
 
     <div class="social-row">
-        <img src="../About Page Assets/google-icon.svg" alt="Continue with Google" width="32" height="32">
-        <img src="../About Page Assets/facebook-icon.svg" alt="Continue with Facebook" width="32" height="32">
-        <img src="../About Page Assets/apple-icon.svg" alt="Continue with Apple" width="32" height="32">
+        <img src="../Home Page Assests/google-icon.png" alt="Continue with Google" class="btn-google-icon" width="36" height="36" style="cursor:pointer;" title="Sign in with Google">
     </div>
 
     <p class="footer-note">Don't have an account? <span onclick="showAuth('signup')">Sign Up</span></p>
@@ -134,10 +132,10 @@
 
 <!-- SIGN UP PAGE -->
 <div class="auth-wrapper hidden" id="signup-container">
-    <h1>Create your account</h1>
-    
-    <button class="btn-google-large">
-        <img src="../About Page Assets/google-icon.svg" alt="" width="24" height="24" role="presentation"> Login with Google
+    <h1>Create Account</h1>
+
+    <button class="btn-google-large btn-google-icon">
+        <img src="../Home Page Assests/google-icon.png" alt="" width="22" height="22" role="presentation"> Continue with Google
     </button>
 
     <div class="divider-container">
@@ -147,23 +145,23 @@
     </div>
 
     <div class="form-group">
-        <label>Name*</label>
-        <input type="text" placeholder="Enter your Name">
+        <label for="signup-name">Full Name*</label>
+        <input type="text" id="signup-name" placeholder="Enter your Name" autocomplete="name">
     </div>
     
     <div class="form-group">
-        <label>Email*</label>
-        <input type="email" placeholder="Enter your Email">
+        <label for="signup-email">Email*</label>
+        <input type="email" id="signup-email" placeholder="Enter your Email" autocomplete="email">
     </div>
     
     <div class="form-group">
-        <label>Password*</label>
-        <input type="password" placeholder="Enter your Password">
+        <label for="signup-password">Password*</label>
+        <input type="password" id="signup-password" placeholder="At least 6 characters" autocomplete="new-password">
     </div>
 
     <div class="flex-row" style="justify-content: flex-start; gap: 10px;">
         <input type="checkbox" id="terms">
-        <label for="terms">I agree to all Terms, Privacy policy & Fees</label>
+        <label for="terms">I agree to all Terms, Privacy policy &amp; Fees</label>
     </div>
 
     <button class="btn-black" id="signup-btn">Sign Up</button>
@@ -222,6 +220,6 @@
 
 
 
-    <script src="../js/main.js"></script>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>
