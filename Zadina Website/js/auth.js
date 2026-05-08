@@ -1,4 +1,4 @@
-// ═══════════════════════════════════════════════════════
+﻿// ═══════════════════════════════════════════════════════
 //  auth.js  —  Login · Sign-up · Google · Forgot password
 //  Firestore collection:  users/{uid}
 //  Used by:  pages/login.html
@@ -65,7 +65,7 @@ document.getElementById("login-btn")?.addEventListener("click", async () => {
   try {
     await setPersistence(auth, remember ? browserLocalPersistence : browserSessionPersistence);
     await signInWithEmailAndPassword(auth, email, password);
-    window.location.href = "../../home.html";
+    window.location.href = "../../index.html";
   } catch (err) {
     console.error("Login error:", err.code, err.message);
     showMsg("login", friendlyError(err.code, err.message), "error");
@@ -145,7 +145,7 @@ document.querySelectorAll(".btn-google-large, .btn-google-icon").forEach(btn => 
     try {
       const cred = await signInWithPopup(auth, provider);
       await createUserDoc(cred.user);
-      window.location.href = "../../home.html";
+      window.location.href = "../../index.html";
     } catch (err) {
       console.error("Google sign-in error:", err.code, err.message);
       if (err.code !== "auth/popup-closed-by-user") {
