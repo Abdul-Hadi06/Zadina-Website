@@ -216,10 +216,41 @@
     .social-row {
         display: flex;
         justify-content: center;
-        gap: 25px;
+        gap: 12px;
         margin-bottom: 25px;
     }
-    .social-row img { width: 32px; height: 32px; cursor: pointer; object-fit: contain; }
+
+    /* Individual social button */
+    .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex: 1;
+        max-width: 120px;
+        padding: 10px 12px;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 30px;
+        background: #fff;
+        cursor: pointer;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: #333;
+        transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .social-btn:hover {
+        border-color: #c9a84c;
+        box-shadow: 0 2px 12px rgba(201,168,76,0.2);
+        transform: translateY(-1px);
+    }
+    .social-btn:active { transform: translateY(0); }
+    .social-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0;
+    }
 
     .footer-note { font-size: 13px; font-weight: 600; }
     .footer-note span { color: #005a5a; cursor: pointer; text-decoration: underline; font-weight: 700; }
@@ -309,6 +340,7 @@
   color: var(--dark);
   z-index: 360;
 }
+
 @media (max-width: 560px) {
   nav { padding: 0 14px; min-height: 56px; }
   .nav-left a, .nav-right a { font-size: 12px; }
