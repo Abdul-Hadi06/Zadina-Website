@@ -1,5 +1,6 @@
 ﻿// ═══════════════════════════════════════════════════════
-//  auth.js  —  Login · Sign-up · Google · Forgot password
+//  auth.js  —  Login · Sign-up · Google · Facebook · Apple
+//              · Forgot password
 //  Firestore collection:  users/{uid}
 //  Used by:  pages/login.html
 // ═══════════════════════════════════════════════════════
@@ -10,6 +11,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  FacebookAuthProvider,
+  OAuthProvider,
   sendPasswordResetEmail,
   updateProfile,
   signOut,
@@ -29,7 +32,7 @@ window.showAuth = function (panel) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-// ── Save user doc to Firestore (best-effort, non-blocking) ──
+// ── Save user doc to Firestore (best-effort) ──────────
 async function createUserDoc(user, extra = {}) {
   try {
     const ref  = doc(db, "users", user.uid);
@@ -37,15 +40,30 @@ async function createUserDoc(user, extra = {}) {
     if (!snap.exists()) {
       await setDoc(ref, {
         uid:       user.uid,
-        email:     user.email,
+        email:     user.email || "",
         name:      user.displayName || extra.name || "",
         createdAt: serverTimestamp(),
         ...extra
       });
     }
-  } catch (firestoreErr) {
-    // Firestore save failed (e.g. rules not set up yet) — log but don't block auth
-    console.warn("Firestore user doc save failed (non-critical):", firestoreErr.message);
+  } catch (e) {
+    console.warn("Firestore user doc save failed (non-critical):", e.message);
+  }
+}
+
+// ── Shared social sign-in handler ────────────────────
+async function socialSignIn(provider, panel) {
+  clearMsg();
+  try {
+    const cred = await signInWithPopup(auth, provider);
+    await createUserDoc(cred.user);
+    window.location.href = "../../index.html";
+  } catch (err) {
+    console.error("Social sign-in error:", err.code, err.message);
+    if (err.code !== "auth/popup-closed-by-user" &&
+        err.code !== "auth/cancelled-popup-request") {
+      showMsg(panel, friendlyError(err.code, err.message), "error");
+    }
   }
 }
 
@@ -73,6 +91,27 @@ document.getElementById("login-btn")?.addEventListener("click", async () => {
   }
 });
 
+// ── LOGIN — Google ────────────────────────────────────
+document.getElementById("login-google-btn")?.addEventListener("click", () => {
+  socialSignIn(new GoogleAuthProvider(), "login");
+});
+
+// ── LOGIN — Facebook ──────────────────────────────────
+document.getElementById("login-facebook-btn")?.addEventListener("click", () => {
+  const provider = new FacebookAuthProvider();
+  provider.addScope("email");
+  provider.addScope("public_profile");
+  socialSignIn(provider, "login");
+});
+
+// ── LOGIN — Apple ─────────────────────────────────────
+document.getElementById("login-apple-btn")?.addEventListener("click", () => {
+  const provider = new OAuthProvider("apple.com");
+  provider.addScope("email");
+  provider.addScope("name");
+  socialSignIn(provider, "login");
+});
+
 // ── SIGN UP ───────────────────────────────────────────
 document.getElementById("signup-btn")?.addEventListener("click", async () => {
   clearMsg();
@@ -81,51 +120,34 @@ document.getElementById("signup-btn")?.addEventListener("click", async () => {
   const password = document.getElementById("signup-password").value;
   const terms    = document.getElementById("terms")?.checked;
 
-  // Client-side validation first
   if (!name)     { showMsg("signup", "Please enter your full name.", "error"); return; }
   if (!email)    { showMsg("signup", "Please enter your email address.", "error"); return; }
   if (!password) { showMsg("signup", "Please enter a password.", "error"); return; }
   if (!terms)    { showMsg("signup", "Please accept the Terms & Privacy Policy.", "error"); return; }
   if (password.length < 6) {
-    showMsg("signup", "Password must be at least 6 characters.", "error");
-    return;
+    showMsg("signup", "Password must be at least 6 characters.", "error"); return;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showMsg("signup", "Please enter a valid email address.", "error");
-    return;
+    showMsg("signup", "Please enter a valid email address.", "error"); return;
   }
 
   setBtnLoading("signup-btn", true, "Creating account…");
-
   try {
-    // Step 1: Create Firebase Auth account
     const cred = await createUserWithEmailAndPassword(auth, email, password);
-
-    // Step 2: Set display name on the auth profile
     await updateProfile(cred.user, { displayName: name });
-
-    // Step 3: Save to Firestore (non-blocking — won't fail signup if Firestore has issues)
     await createUserDoc(cred.user, { name });
-
-    // Step 4: Sign out so user must log in manually
     await signOut(auth);
 
-    // Step 5: Reset form fields
+    // Reset form
     document.getElementById("signup-name").value     = "";
     document.getElementById("signup-email").value    = "";
     document.getElementById("signup-password").value = "";
     const termsBox = document.getElementById("terms");
     if (termsBox) termsBox.checked = false;
 
-    // Step 6: Switch to login panel with success message
+    // Switch to login with success message
     window.showAuth("login");
-    showMsg(
-      "login",
-      `✓ Account created! Welcome, ${name}. Please log in to continue.`,
-      "success"
-    );
-
-    // Pre-fill email for convenience
+    showMsg("login", `✓ Account created! Welcome, ${name}. Please log in to continue.`, "success");
     const loginEmail = document.getElementById("login-email");
     if (loginEmail) loginEmail.value = email;
 
@@ -137,24 +159,9 @@ document.getElementById("signup-btn")?.addEventListener("click", async () => {
   }
 });
 
-// ── GOOGLE SIGN-IN ────────────────────────────────────
-document.querySelectorAll(".btn-google-large, .btn-google-icon").forEach(btn => {
-  btn.addEventListener("click", async () => {
-    clearMsg();
-    const provider = new GoogleAuthProvider();
-    try {
-      const cred = await signInWithPopup(auth, provider);
-      await createUserDoc(cred.user);
-      window.location.href = "../../index.html";
-    } catch (err) {
-      console.error("Google sign-in error:", err.code, err.message);
-      if (err.code !== "auth/popup-closed-by-user") {
-        const panel = document.getElementById("signup-container")?.classList.contains("hidden")
-          ? "login" : "signup";
-        showMsg(panel, friendlyError(err.code, err.message), "error");
-      }
-    }
-  });
+// ── SIGN UP — Google (one-step, redirect immediately) ─
+document.getElementById("signup-google-btn")?.addEventListener("click", () => {
+  socialSignIn(new GoogleAuthProvider(), "signup");
 });
 
 // ── FORGOT PASSWORD ───────────────────────────────────
@@ -183,13 +190,9 @@ function showMsg(panel, text, type) {
     el = document.createElement("p");
     el.id = id;
     el.style.cssText = `
-      font-family: sans-serif;
-      font-size: 13px;
-      margin: 0 0 14px;
-      padding: 11px 16px;
-      border-radius: 8px;
-      text-align: center;
-      line-height: 1.5;
+      font-family: sans-serif; font-size: 13px;
+      margin: 0 0 14px; padding: 11px 16px;
+      border-radius: 8px; text-align: center; line-height: 1.5;
     `;
     const wrapper  = document.getElementById(`${panel}-container`);
     const firstBtn = wrapper?.querySelector("button");
@@ -216,23 +219,23 @@ function setBtnLoading(id, loading, label) {
   btn.textContent = label;
 }
 
-// Pass the raw message as fallback so we always see something useful
 function friendlyError(code, rawMessage) {
   const map = {
-    "auth/user-not-found":           "No account found with that email.",
-    "auth/wrong-password":           "Incorrect password. Try again.",
-    "auth/invalid-credential":       "Invalid email or password.",
-    "auth/email-already-in-use":     "An account with this email already exists.",
-    "auth/weak-password":            "Password must be at least 6 characters.",
-    "auth/invalid-email":            "Please enter a valid email address.",
-    "auth/too-many-requests":        "Too many attempts. Please try again later.",
-    "auth/network-request-failed":   "Network error. Check your connection.",
-    "auth/popup-blocked":            "Popup was blocked. Please allow popups for this site.",
-    "auth/operation-not-allowed":    "Email/password sign-in is not enabled. Please contact support.",
-    "auth/configuration-not-found":  "Firebase is not configured correctly. Please contact support.",
-    "auth/internal-error":           "An internal error occurred. Please try again.",
-    "auth/admin-restricted-operation": "Sign-up is currently restricted. Please contact support."
+    "auth/user-not-found":              "No account found with that email.",
+    "auth/wrong-password":              "Incorrect password. Try again.",
+    "auth/invalid-credential":          "Invalid email or password.",
+    "auth/email-already-in-use":        "An account with this email already exists.",
+    "auth/weak-password":               "Password must be at least 6 characters.",
+    "auth/invalid-email":               "Please enter a valid email address.",
+    "auth/too-many-requests":           "Too many attempts. Please try again later.",
+    "auth/network-request-failed":      "Network error. Check your connection.",
+    "auth/popup-blocked":               "Popup was blocked. Please allow popups for this site.",
+    "auth/operation-not-allowed":       "This sign-in method is not enabled. Please contact support.",
+    "auth/account-exists-with-different-credential":
+                                        "An account already exists with this email using a different sign-in method.",
+    "auth/configuration-not-found":     "Firebase is not configured correctly. Please contact support.",
+    "auth/internal-error":              "An internal error occurred. Please try again.",
+    "auth/admin-restricted-operation":  "Sign-up is currently restricted. Please contact support."
   };
-  // Return the mapped message, or the raw Firebase message, or a generic fallback
   return map[code] || rawMessage || "Something went wrong. Please try again.";
 }
