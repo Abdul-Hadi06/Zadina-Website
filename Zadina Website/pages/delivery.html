@@ -99,43 +99,36 @@
 
         <!-- Thank You Message -->
         <div class="thank-you-box">
-            <h1 class="thank-you-title">Hi User!</h1>
-            <p class="thank-you-message">We can see that you have placed an order with us. Your Order will be shipped soon!</p>
+            <h1 class="thank-you-title" id="conf-greeting">Thank you for your order!</h1>
+            <p class="thank-you-message" id="conf-message">Your order has been placed successfully. We'll get it shipped to you soon!</p>
         </div>
 
         <!-- Order Status Timeline -->
         <div class="order-status-card">
             <div class="status-timeline">
                 <div class="status-step completed">
-                    <div class="status-icon">
-                        <i class="fas fa-check"></i>
-                    </div>
+                    <div class="status-icon"><i class="fas fa-check"></i></div>
                     <p class="status-label">Ordered</p>
-                    <p class="status-date">Apr 08</p>
+                    <p class="status-date" id="conf-order-date">—</p>
                 </div>
                 <div class="status-line completed"></div>
                 <div class="status-step active">
-                    <div class="status-icon">
-                        <i class="fas fa-box"></i>
-                    </div>
-                    <p class="status-label">Shipped</p>
-                    <p class="status-date">Apr 18</p>
+                    <div class="status-icon"><i class="fas fa-box"></i></div>
+                    <p class="status-label">Processing</p>
+                    <p class="status-date" id="conf-process-date">—</p>
                 </div>
                 <div class="status-line"></div>
                 <div class="status-step">
-                    <div class="status-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
+                    <div class="status-icon"><i class="fas fa-truck"></i></div>
                     <p class="status-label">Delivered</p>
-                    <p class="status-date">Apr 21</p>
+                    <p class="status-date" id="conf-delivery-date">—</p>
                 </div>
             </div>
         </div>
 
         <!-- Your Cart Section -->
         <div class="order-cart-section">
-            <h2 class="cart-section-title">Your Cart (4)</h2>
-
+            <h2 class="cart-section-title" id="conf-cart-title">Your Order</h2>
             <table class="order-cart-table">
                 <thead>
                     <tr>
@@ -144,58 +137,8 @@
                         <th>Price</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Item 1 -->
-                    <tr class="cart-item-row">
-                        <td class="product-cell">
-                            <img src="../Home Page Assests/9.png" alt="UAE Logo Leather Box" class="product-img">
-                            <div class="product-info">
-                                <p class="product-name">UAE Logo Leather Box With Assorted Dates</p>
-                                <p class="product-weight">Approx Weight: 450g</p>
-                            </div>
-                        </td>
-                        <td class="quantity-cell">1</td>
-                        <td class="price-cell">75 <span class="aed">د.إ</span></td>
-                    </tr>
-
-                    <!-- Item 2 -->
-                    <tr class="cart-item-row">
-                        <td class="product-cell">
-                            <img src="../Home Page Assests/5.png" alt="Dubai Skyline Gift Box" class="product-img">
-                            <div class="product-info">
-                                <p class="product-name">Dubai Skyline Gift Box with Assorted Stuffed Dates</p>
-                                <p class="product-weight">Approx Weight: 380g</p>
-                            </div>
-                        </td>
-                        <td class="quantity-cell">2</td>
-                        <td class="price-cell">240 <span class="aed">د.إ</span></td>
-                    </tr>
-
-                    <!-- Item 3 -->
-                    <tr class="cart-item-row">
-                        <td class="product-cell">
-                            <img src="../Home Page Assests/11.png" alt="Luxurious Camel Leather" class="product-img">
-                            <div class="product-info">
-                                <p class="product-name">Luxurious Camel Leather Round Date Box</p>
-                                <p class="product-weight">Approx Weight: 1.2kg - 3.3kg</p>
-                            </div>
-                        </td>
-                        <td class="quantity-cell">1</td>
-                        <td class="price-cell">1190 <span class="aed">د.إ</span></td>
-                    </tr>
-
-                    <!-- Item 4 -->
-                    <tr class="cart-item-row">
-                        <td class="product-cell">
-                            <img src="../Home Page Assests/12.png" alt="Milk Chocolate" class="product-img">
-                            <div class="product-info">
-                                <p class="product-name">Milk Chocolate with Caramelised Hazelnut Gianduia</p>
-                                <p class="product-weight">Approx Weight: 0.5kg</p>
-                            </div>
-                        </td>
-                        <td class="quantity-cell">2</td>
-                        <td class="price-cell">310 <span class="aed">د.إ</span></td>
-                    </tr>
+                <tbody id="conf-items-tbody">
+                    <!-- Populated by script -->
                 </tbody>
             </table>
         </div>
@@ -206,24 +149,28 @@
             <!-- Left Column: Order Info -->
             <div class="order-info-col">
                 <div class="info-item">
-                    <p class="info-label">Ordered</p>
-                    <p class="info-value">Apr 08, 2026, 03:34 PM</p>
+                    <p class="info-label">Order Number</p>
+                    <p class="info-value" id="conf-order-id">—</p>
                 </div>
                 <div class="info-item">
-                    <p class="info-label">Ordered from</p>
-                    <p class="info-value">Delivery Address</p>
+                    <p class="info-label">Ordered</p>
+                    <p class="info-value" id="conf-ordered-at">—</p>
+                </div>
+                <div class="info-item">
+                    <p class="info-label">Customer Name</p>
+                    <p class="info-value" id="conf-customer-name">—</p>
+                </div>
+                <div class="info-item">
+                    <p class="info-label">Email</p>
+                    <p class="info-value" id="conf-email">—</p>
+                </div>
+                <div class="info-item">
+                    <p class="info-label">Shipping Address</p>
+                    <p class="info-value" id="conf-address">—</p>
                 </div>
                 <div class="info-item">
                     <p class="info-label">Payment Method</p>
-                    <p class="info-value">Credit Card (****3456)</p>
-                </div>
-                <div class="info-item">
-                    <p class="info-label">Order Number</p>
-                    <p class="info-value">KORD12789-90123B</p>
-                </div>
-                <div class="info-item">
-                    <p class="info-label">Shipping address</p>
-                    <p class="info-value">Shipping Address</p>
+                    <p class="info-value" id="conf-payment">—</p>
                 </div>
             </div>
 
@@ -231,23 +178,30 @@
             <div class="order-summary-col">
                 <div class="summary-row">
                     <span class="summary-label">Subtotal:</span>
-                    <span class="summary-value">1815 <span class="aed">د.إ</span></span>
-                </div>
-                <div class="summary-row">
-                    <span class="summary-label">Shipping:</span>
-                    <span class="summary-value">15 <span class="aed">د.إ</span></span>
+                    <span class="summary-value" id="conf-subtotal">— <span class="aed">د.إ</span></span>
                 </div>
                 <div class="summary-row">
                     <span class="summary-label">Discount:</span>
-                    <span class="summary-value">0 <span class="aed">د.إ</span></span>
+                    <span class="summary-value" id="conf-discount">0 <span class="aed">د.إ</span></span>
                 </div>
                 <div class="summary-row">
-                    <span class="summary-label">Tax:</span>
-                    <span class="summary-value">92 <span class="aed">د.إ</span></span>
+                    <span class="summary-label">Shipping:</span>
+                    <span class="summary-value">Free <span class="aed">د.إ</span></span>
                 </div>
                 <div class="summary-row summary-total">
                     <span class="summary-label">Total:</span>
-                    <span class="summary-value">1922 <span class="aed">د.إ</span></span>
+                    <span class="summary-value" id="conf-total">— <span class="aed">د.إ</span></span>
+                </div>
+                <div style="margin-top:24px;">
+                    <a href="all-products.html"
+                       style="display:block;text-align:center;background:#c9a84c;color:#fff;
+                              font-family:sans-serif;font-weight:700;font-size:14px;
+                              padding:14px 24px;border-radius:50px;text-decoration:none;
+                              transition:background .2s;"
+                       onmouseover="this.style.background='#a07828'"
+                       onmouseout="this.style.background='#c9a84c'">
+                        Continue Shopping →
+                    </a>
                 </div>
             </div>
 
@@ -255,6 +209,118 @@
 
     </div>
 </section>
+
+<script>
+(function () {
+  // ── Read order from localStorage ──────────────────
+  let order = null;
+  try {
+    order = JSON.parse(localStorage.getItem("zadina_last_order") || "null");
+  } catch (e) {}
+
+  // ── Helper: format date ────────────────────────────
+  function fmtDate(iso) {
+    if (!iso) return "—";
+    const d = new Date(iso);
+    return d.toLocaleDateString("en-AE", { day: "2-digit", month: "short", year: "numeric" });
+  }
+  function fmtDateShort(iso) {
+    if (!iso) return "—";
+    const d = new Date(iso);
+    return d.toLocaleDateString("en-AE", { day: "2-digit", month: "short" });
+  }
+  function addDays(iso, days) {
+    if (!iso) return null;
+    const d = new Date(iso);
+    d.setDate(d.getDate() + days);
+    return d.toISOString();
+  }
+
+  // ── Payment method label ───────────────────────────
+  function paymentLabel(id) {
+    const map = {
+      "credit-card":      "Credit Card",
+      "paypal":           "PayPal",
+      "cash-on-delivery": "Cash on Delivery"
+    };
+    return map[id] || id || "—";
+  }
+
+  if (!order) {
+    // No order found — show a generic message
+    document.getElementById("conf-greeting").textContent   = "Order Confirmation";
+    document.getElementById("conf-message").textContent    = "Your order has been placed. Check your email for details.";
+    document.getElementById("conf-items-tbody").innerHTML  =
+      '<tr><td colspan="3" style="text-align:center;padding:30px;font-family:sans-serif;color:#888;">No order details available.</td></tr>';
+    return;
+  }
+
+  // ── Populate greeting ──────────────────────────────
+  const firstName = (order.name || "").split(" ")[0] || "there";
+  document.getElementById("conf-greeting").textContent =
+    "Thank you, " + firstName + "! 🎉";
+  document.getElementById("conf-message").textContent =
+    "Your order #" + (order.orderId || "").slice(0, 8).toUpperCase() +
+    " has been placed successfully. We'll get it shipped to you soon!";
+
+  // ── Dates ──────────────────────────────────────────
+  const orderedAt  = order.createdAt || new Date().toISOString();
+  const processAt  = addDays(orderedAt, 1);
+  const deliverAt  = addDays(orderedAt, 4);
+
+  document.getElementById("conf-order-date").textContent    = fmtDateShort(orderedAt);
+  document.getElementById("conf-process-date").textContent  = fmtDateShort(processAt);
+  document.getElementById("conf-delivery-date").textContent = fmtDateShort(deliverAt);
+
+  // ── Order info ─────────────────────────────────────
+  document.getElementById("conf-order-id").textContent      = (order.orderId || "—").slice(0, 16).toUpperCase();
+  document.getElementById("conf-ordered-at").textContent    = fmtDate(orderedAt);
+  document.getElementById("conf-customer-name").textContent = order.name    || "—";
+  document.getElementById("conf-email").textContent         = order.email   || "—";
+  document.getElementById("conf-address").textContent       = order.address || "—";
+  document.getElementById("conf-payment").textContent       = paymentLabel(order.paymentMethod);
+
+  // ── Cart title ─────────────────────────────────────
+  const items = order.items || [];
+  const totalQty = items.reduce((s, i) => s + (parseInt(i.qty) || 1), 0);
+  document.getElementById("conf-cart-title").textContent =
+    "Your Order (" + totalQty + " item" + (totalQty !== 1 ? "s" : "") + ")";
+
+  // ── Items table ────────────────────────────────────
+  const tbody = document.getElementById("conf-items-tbody");
+  if (items.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:30px;font-family:sans-serif;color:#888;">No items found.</td></tr>';
+  } else {
+    tbody.innerHTML = items.map(item => {
+      const price = parseFloat(item.price) || 0;
+      const qty   = parseInt(item.qty)    || 1;
+      const total = (price * qty).toFixed(0);
+      const imgHtml = item.image
+        ? `<img src="${item.image}" alt="${item.name}" class="product-img" onerror="this.style.display='none'">`
+        : `<div style="width:60px;height:60px;background:#f0ebe3;border-radius:8px;flex-shrink:0;"></div>`;
+      return `
+        <tr class="cart-item-row">
+          <td class="product-cell">
+            ${imgHtml}
+            <div class="product-info">
+              <p class="product-name">${item.name}</p>
+              <p class="product-weight">${item.weight || ""}</p>
+            </div>
+          </td>
+          <td class="quantity-cell">${qty}</td>
+          <td class="price-cell">${total} <span class="aed">د.إ</span></td>
+        </tr>`;
+    }).join("");
+  }
+
+  // ── Totals ─────────────────────────────────────────
+  const fmt = v => parseFloat(v || 0).toFixed(0) + ' <span class="aed">د.إ</span>';
+  document.getElementById("conf-subtotal").innerHTML = fmt(order.subtotal);
+  document.getElementById("conf-discount").innerHTML = fmt(order.discountAmt || 0);
+  document.getElementById("conf-total").innerHTML    = fmt(order.total);
+
+})();
+</script>
 
 <!-- FOOTER -->
 <footer class="footer">
