@@ -19,6 +19,15 @@ if (_page === 'cart.html')     import('./cart.js').then(m => m.initCartPage()).c
 if (_page === 'checkout.html') import('./checkout.js').catch(console.error);
 if (_page === 'contact.html')  import('./contact.js').catch(console.error);
 
+// Add-to-cart wiring on all product pages
+const _productPages = [
+  'chocolate-product.html', 'gift-options.html', 'everyday-gift-boxes.html',
+  'our-favorites.html', 'everyday-dates.html', 'gourmet-products.html',
+  'luxury-gift-boxes.html', 'our-story.html', 'all-products.html'
+];
+if (_productPages.includes(_page)) {
+  import('./add-to-cart.js').then(m => m.initAddToCartButtons()).catch(console.error);
+}
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ─────────────────────────────────────────────
@@ -254,72 +263,145 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ─────────────────────────────────────────────
      15. PERSONALISED GIFT BOXES (personalised-gift-boxes.html)
   ───────────────────────────────────────────── */
-  const qtyEl       = document.getElementById('qty-count');
-  const totalEl     = document.getElementById('total-price');
+  const qtyEl        = document.getElementById('qty-count');
+  const totalEl      = document.getElementById('total-price');
   const summaryTable = document.querySelector('.summary-list tbody');
   const checkoutBtn  = document.querySelector('.btn-checkout');
 
   if (qtyEl) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // Use the same key as the rest of the site
+    let boxCart = JSON.parse(localStorage.getItem('zadina_personalised') || '[]');
 
     function getQty() { return parseInt(qtyEl.innerText) || 1; }
 
     function updateVisualiser() {
       let total = 0;
       let html  = '';
-      cart.forEach(item => {
+      boxCart.forEach(item => {
         total += item.price * item.qty;
-        html  += `<tr><td>• ${item.name}</td><td align="right"><b>${item.price * item.qty} د.إ</b></td></tr>`;
+        html  += `<tr>
+          <td style="padding:6px 0;font-family:sans-serif;font-size:13px;">• ${item.name}</td>
+          <td align="right" style="font-family:sans-serif;font-size:13px;font-weight:700;">${(item.price * item.qty).toFixed(0)} د.إ</td>
+        </tr>`;
       });
       if (summaryTable) {
-        summaryTable.innerHTML = cart.length === 0
-          ? '<tr><td>Your custom box is empty.</td></tr>'
+        summaryTable.innerHTML = boxCart.length === 0
+          ? '<tr><td style="font-family:sans-serif;font-size:13px;color:#888;padding:10px 0;">No items added yet.</td></tr>'
           : html;
       }
-      if (totalEl) totalEl.innerText = total + ' د.إ';
-      localStorage.setItem('cart', JSON.stringify(cart));
+      if (totalEl) totalEl.innerText = total.toFixed(0) + ' د.إ';
+      localStorage.setItem('zadina_personalised', JSON.stringify(boxCart));
     }
+
+    // Box image map — paths relative to pages/ folder
+    const BOX_IMAGES = {
+      'Heritage Wood Box':      '../Personalised Gift Boxes Assets/6.png',
+      'Classic Green Box':      '../Personalised Gift Boxes Assets/7.png',
+      'Black Leather Box':      '../Personalised Gift Boxes Assets/8.png',
+      'Three Layer Drawer Box': '../Personalised Gift Boxes Assets/9.png'
+    };
 
     function updatePreview(name) {
       const previewBox    = document.getElementById('preview-box');
       const previewRibbon = document.getElementById('preview-ribbon');
       const previewCard   = document.getElementById('preview-card');
-      if (previewBox) {
-        if (name === 'Heritage Wood Box')      previewBox.src = 'Personalised Gift Boxes Assets/6.png';
-        if (name === 'Classic Green Box')      previewBox.src = 'Personalised Gift Boxes Assets/7.png';
-        if (name === 'Black Leather Box')      previewBox.src = 'Personalised Gift Boxes Assets/8.png';
-        if (name === 'Three Layer Drawer Box') previewBox.src = 'Personalised Gift Boxes Assets/9.png';
+
+      // Update box image if this is a box selection
+      if (previewBox && BOX_IMAGES[name]) {
+        previewBox.src = BOX_IMAGES[name];
+        previewBox.style.opacity = '0';
+        previewBox.onload = () => { previewBox.style.transition = 'opacity 0.4s'; previewBox.style.opacity = '1'; };
       }
-      if (previewRibbon && name === 'Custom Ribbon') previewRibbon.style.display = 'block';
-      if (previewCard   && name === 'Gift Card')     previewCard.style.display   = 'block';
+      // Show ribbon overlay
+      if (previewRibbon && name === 'Custom Ribbon') {
+        previewRibbon.style.display = 'block';
+      }
+      // Show gift card overlay
+      if (previewCard && name === 'Gift Card') {
+        previewCard.style.display = 'block';
+      }
     }
 
+    // Wire up all .btn-add buttons
     document.querySelectorAll('.btn-add').forEach(btn => {
       btn.addEventListener('click', () => {
         const name  = btn.dataset.name;
-        const price = parseFloat(btn.dataset.price);
+        const price = parseFloat(btn.dataset.price) || 0;
         const qty   = getQty();
-        const existing = cart.find(i => i.name === name);
-        if (existing) { existing.qty += qty; } else { cart.push({ name, price, qty }); }
+        if (!name) return;
+
+        const existing = boxCart.find(i => i.name === name);
+        if (existing) {
+          existing.qty += qty;
+        } else {
+          boxCart.push({ name, price, qty });
+        }
+
         updateVisualiser();
         updatePreview(name);
-        qtyEl.innerText = 1;
+
+        // Visual feedback on button
+        const orig = btn.textContent;
+        btn.textContent = '✓ Added';
+        btn.style.background = '#27ae60';
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 1200);
       });
     });
 
     window.updateQty = function (change) {
-      let currentQty = getQty();
-      currentQty = Math.max(1, currentQty + change);
-      qtyEl.innerText = currentQty;
+      const current = Math.max(1, getQty() + change);
+      qtyEl.innerText = current;
     };
 
+    // Initial render
     updateVisualiser();
 
+    // "Add to cart" button — adds the whole personalised box to zadina_cart
     if (checkoutBtn) {
       checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) { alert('Your cart is empty!'); return; }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        window.location.href = 'cart.html';
+        if (boxCart.length === 0) {
+          alert('Please add at least one item to your box first.');
+          return;
+        }
+        // Build a single cart item representing the whole personalised box
+        const total = boxCart.reduce((s, i) => s + i.price * i.qty, 0);
+        const names = boxCart.map(i => i.name).join(', ');
+        const boxItem = {
+          id:     'personalised-' + Date.now(),
+          name:   'Personalised Gift Box (' + names + ')',
+          price:  total,
+          image:  document.getElementById('preview-box')?.src || '',
+          weight: '',
+          qty:    1
+        };
+
+        // Add to main cart
+        const mainCart = JSON.parse(localStorage.getItem('zadina_cart') || '[]');
+        mainCart.push(boxItem);
+        localStorage.setItem('zadina_cart', JSON.stringify(mainCart));
+
+        // Clear personalised selections
+        localStorage.removeItem('zadina_personalised');
+        boxCart = [];
+        updateVisualiser();
+
+        // Reset previews
+        const previewBox = document.getElementById('preview-box');
+        if (previewBox) previewBox.src = '../Personalised Gift Boxes Assets/16.png';
+        const previewRibbon = document.getElementById('preview-ribbon');
+        if (previewRibbon) previewRibbon.style.display = 'none';
+        const previewCard = document.getElementById('preview-card');
+        if (previewCard) previewCard.style.display = 'none';
+
+        // Show success then go to cart
+        checkoutBtn.textContent = '✓ Added to Cart!';
+        checkoutBtn.style.background = '#27ae60';
+        setTimeout(() => { window.location.href = 'cart.html'; }, 1000);
       });
     }
   }
