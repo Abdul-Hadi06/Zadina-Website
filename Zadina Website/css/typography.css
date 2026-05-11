@@ -1,0 +1,288 @@
+/* ═══════════════════════════════════════════════════════
+   typography.css  —  Global font system for Zadina
+   Loaded on every page AFTER page-specific CSS.
+
+   Font pairing (luxury e-commerce standard):
+   • Headings / brand titles  →  Playfair Display (serif, elegant)
+   • Body / UI / labels       →  Inter (sans-serif, clean, readable)
+
+   Size scale (industry standard):
+   • 12px  — captions, badges, tiny labels
+   • 13px  — secondary text, sub-labels
+   • 14px  — body text, nav links, form labels  ← base
+   • 15px  — slightly prominent body
+   • 16px  — buttons, section sub-headings
+   • 18px  — small section titles
+   • 22px  — card titles, medium headings
+   • 28px  — page sub-titles
+   • 36px  — section titles (mobile)
+   • 42px  — section titles (desktop)
+   • 52px+ — hero / display headings (use clamp)
+   ═══════════════════════════════════════════════════════ */
+
+/* ── 1. Base reset ───────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px; /* 1rem = 16px */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #2c1a0e;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── 2. Headings — Playfair Display ─────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #2c1a0e;
+  margin: 0;
+}
+
+h1 { font-size: clamp(36px, 6vw, 64px); }
+h2 { font-size: clamp(26px, 4vw, 42px); }
+h3 { font-size: clamp(18px, 2.5vw, 26px); }
+h4 { font-size: 18px; }
+h5 { font-size: 15px; font-family: 'Inter', sans-serif; font-weight: 700; }
+h6 { font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 700; }
+
+/* ── 3. Body text ────────────────────────────────────── */
+p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── 4. Navigation ───────────────────────────────────── */
+nav a,
+.nav-left a,
+.nav-right a,
+.nav-dropdown > a,
+.dropdown-menu a,
+.nav-mobile-menu a {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* ── 5. Buttons ──────────────────────────────────────── */
+button,
+.btn-black,
+.btn-gold,
+.pay-now-btn,
+.checkout-btn,
+.explore-btn,
+.feat-explore-btn,
+.add-btn,
+.buy-btn,
+.apply-btn,
+.apply-discount-btn,
+.form-submit,
+.contact-us-btn,
+.hero-btn,
+.rmd-shop-btn,
+.feat-explore-btn,
+.social-btn {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* ── 6. Form inputs & labels ─────────────────────────── */
+input,
+textarea,
+select,
+.form-input,
+.form-group input,
+.form-group textarea,
+.form-group select {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+}
+
+label,
+.form-group label,
+.fg label,
+.section-title,
+.checkbox-label {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* ── 7. Product cards ────────────────────────────────── */
+.prod-title,
+.product-name,
+.prod-card-title,
+.feat-card-name,
+.item-name,
+.cart-item-name,
+.like-name,
+.also-name {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+}
+
+.prod-price,
+.product-price,
+.prod-card-price,
+.feat-card-price,
+.item-price,
+.cart-price,
+.like-price,
+.also-price,
+.price-tag {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+/* ── 8. Section titles ───────────────────────────────── */
+.sec-title,
+.feat-section-title,
+.feat-title,
+.all-products-header h1,
+.page-title,
+.contact-title,
+.cart-title,
+.checkout-title,
+.thank-you-title,
+.hero-title,
+.choc-title,
+.about-hero h1 {
+  font-family: 'Playfair Display', serif !important;
+}
+
+/* ── 9. Footer ───────────────────────────────────────── */
+.footer,
+.footer p,
+.f-links li,
+.f-links li a,
+.footer-bottom,
+.footer-bottom span,
+.footer-bottom a {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+}
+
+.f-links h4 {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+/* ── 10. Auth page ───────────────────────────────────── */
+.auth-wrapper h1 {
+  font-family: 'Playfair Display', serif !important;
+  font-size: clamp(36px, 6vw, 52px) !important;
+}
+
+.subtitle,
+.footer-note,
+.forgot-pass {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+}
+
+/* ── 11. Cart & checkout ─────────────────────────────── */
+.cart-title,
+.checkout-title,
+.summary-title,
+.gift-option-title,
+.summary-title-outside {
+  font-family: 'Playfair Display', serif !important;
+}
+
+.cart-item-name,
+.item-name,
+.product-name,
+.item-weight,
+.product-weight,
+.cart-item-sub {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.summary-row span,
+.total-row span,
+.total-final span {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+}
+
+/* ── 12. FAQ ─────────────────────────────────────────── */
+.faq-question,
+.faq-answer {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+}
+
+/* ── 13. Delivery / order confirmation ───────────────── */
+.thank-you-title {
+  font-family: 'Playfair Display', serif !important;
+  font-size: clamp(24px, 4vw, 36px) !important;
+}
+
+.thank-you-message,
+.info-label,
+.info-value,
+.status-label,
+.status-date,
+.product-name,
+.product-weight {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+}
+
+/* ── 14. Misc overrides ──────────────────────────────── */
+/* Remove any remaining Georgia/Segoe/Helvetica/Arial overrides */
+.sec-sub,
+.contact-sub,
+.page-sub,
+.hero-desc,
+.rmd-card-desc,
+.corp-center p,
+.emirati-txt p,
+.about-hero-right p,
+.section-content p,
+.variety-desc,
+.choc-desc {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.75 !important;
+}
+
+/* Gold section titles keep Playfair */
+.contact-title,
+.page-title,
+.hero-title,
+.choc-title,
+.about-hero h1,
+.rmd-hero-txt h2,
+.emirati-txt h2,
+.corp-center h2,
+.section-content h2,
+.variety-name,
+.story-card h3,
+.featured-card h3 {
+  font-family: 'Playfair Display', serif !important;
+}
+
+/* aed currency symbol */
+.aed {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+}
