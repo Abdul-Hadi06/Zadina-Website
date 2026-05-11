@@ -11,13 +11,58 @@ import {
   collection, addDoc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+// ── State ─────────────────────────────────────────────
+let cartSubtotal   = 0;   // raw subtotal from cart items
+let appliedDiscount = 0;  // percentage e.g. 10 = 10%
+
 // ── Get cart from localStorage ────────────────────────
 function getLocalCart() {
   try { return JSON.parse(localStorage.getItem("zadina_cart") || "[]"); }
   catch { return []; }
 }
 
-// ── Render cart summary from localStorage ─────────────
+// ── Recalculate and render all totals ─────────────────
+// Called on page load AND every time a discount is applied/removed
+function recalcTotals() {
+  const fmt = v => `${parseFloat(v).toFixed(0)} <span class="aed">د.إ</span>`;
+
+  const discountAmt = appliedDiscount > 0
+    ? parseFloat((cartSubtotal * appliedDiscount / 100).toFixed(2))
+    : 0;
+  const total = parseFloat((cartSubtotal - discountAmt).toFixed(2));
+
+  // Subtotal
+  const subtotalEl = document.getElementById("checkout-subtotal");
+  if (subtotalEl) subtotalEl.innerHTML = fmt(cartSubtotal);
+
+  // Discount row — show only when a discount is active
+  const discountRow = document.getElementById("checkout-discount-row");
+  const discountEl  = document.getElementById("checkout-discount");
+  if (discountRow && discountEl) {
+    if (discountAmt > 0) {
+      discountRow.style.display = "flex";
+      discountEl.innerHTML = `−${fmt(discountAmt)}`;
+    } else {
+      discountRow.style.display = "none";
+    }
+  }
+
+  // Total (after discount)
+  const totalEl = document.getElementById("checkout-total");
+  if (totalEl) {
+    totalEl.innerHTML = fmt(total);
+    // Animate the total change
+    totalEl.style.transition = "transform 0.2s ease, color 0.2s ease";
+    totalEl.style.transform  = "scale(1.08)";
+    totalEl.style.color      = "#c9a84c";
+    setTimeout(() => {
+      totalEl.style.transform = "scale(1)";
+      totalEl.style.color     = "";
+    }, 300);
+  }
+}
+
+// ── Render cart items from localStorage ───────────────
 function renderCheckoutSummary() {
   const cart      = getLocalCart();
   const container = document.querySelector(".cart-items");
@@ -31,18 +76,20 @@ function renderCheckoutSummary() {
         Your cart is empty.
         <a href="all-products.html" style="color:#c9a84c;font-weight:700;">Shop now →</a>
       </p>`;
-    updateTotals(0);
+    cartSubtotal = 0;
+    recalcTotals();
     return;
   }
 
-  if (titleEl) titleEl.textContent = `Your Cart (${cart.length})`;
+  const totalItems = cart.reduce((s, i) => s + (parseInt(i.qty) || 1), 0);
+  if (titleEl) titleEl.textContent = `Your Cart (${totalItems})`;
 
   container.innerHTML = cart.map(item => {
-    const price = parseFloat(item.price) || 0;
-    const qty   = parseInt(item.qty)    || 1;
-    const total = (price * qty).toFixed(0);
+    const price    = parseFloat(item.price) || 0;
+    const qty      = parseInt(item.qty)    || 1;
+    const lineTotal = (price * qty).toFixed(0);
     return `
-      <div class="cart-item" data-id="${item.id}" data-price="${price}" data-qty="${qty}">
+      <div class="cart-item">
         <div class="item-product">
           <span class="item-qty-badge">×${qty}</span>
           <img src="${item.image || ""}" alt="${item.name}" class="item-img"
@@ -54,24 +101,14 @@ function renderCheckoutSummary() {
           </div>
         </div>
         <div class="item-quantity">${qty}</div>
-        <div class="item-price">${total} <span class="aed">د.إ</span></div>
+        <div class="item-price">${lineTotal} <span class="aed">د.إ</span></div>
       </div>`;
   }).join("");
 
-  const subtotal = cart.reduce((s, i) =>
+  // Calculate subtotal and render totals
+  cartSubtotal = cart.reduce((s, i) =>
     s + (parseFloat(i.price) || 0) * (parseInt(i.qty) || 1), 0);
-  updateTotals(subtotal);
-}
-
-function updateTotals(subtotal) {
-  const fmt = v => `${v.toFixed(0)} <span class="aed">د.إ</span>`;
-  document.querySelectorAll(".total-row").forEach(row => {
-    const label = row.querySelector("span:first-child")?.textContent?.toLowerCase() || "";
-    const val   = row.querySelector("span:last-child");
-    if (!val) return;
-    if (label.includes("subtotal"))                          val.innerHTML = fmt(subtotal);
-    if (label.includes("total") && !label.includes("sub"))   val.innerHTML = fmt(subtotal);
-  });
+  recalcTotals();
 }
 
 // ── Pre-fill form if logged in ────────────────────────
@@ -101,19 +138,34 @@ document.querySelectorAll("input[name='payment']").forEach(radio => {
 
 // ── Discount codes ────────────────────────────────────
 const DISCOUNT_CODES = { "ZADINA10": 10, "WELCOME15": 15, "GIFT20": 20 };
-let appliedDiscount = 0;
 
+// Wire up BOTH discount inputs (left form + right summary panel)
 document.querySelectorAll(".apply-btn, .apply-discount-btn").forEach(btn => {
   btn.addEventListener("click", () => {
+    // Get the input that's directly before this button
     const input = btn.previousElementSibling;
     const code  = (input?.value || "").trim().toUpperCase();
-    if (!code) { showMsg("Enter a discount code first.", "error"); return; }
+
+    if (!code) {
+      showMsg("Enter a discount code first.", "error");
+      return;
+    }
+
     if (DISCOUNT_CODES[code]) {
       appliedDiscount = DISCOUNT_CODES[code];
-      showMsg(`✓ Code "${code}" applied — ${appliedDiscount}% off!`, "success");
+      // Recalculate totals immediately
+      recalcTotals();
+      showMsg(
+        `✓ Code "${code}" applied — ${appliedDiscount}% off! You save ${
+          parseFloat((cartSubtotal * appliedDiscount / 100).toFixed(0))
+        } د.إ`,
+        "success"
+      );
     } else {
+      // Invalid code — remove any existing discount
       appliedDiscount = 0;
-      showMsg("Invalid discount code.", "error");
+      recalcTotals();
+      showMsg("Invalid discount code. Try ZADINA10, WELCOME15, or GIFT20.", "error");
     }
   });
 });
@@ -141,7 +193,6 @@ document.querySelector(".pay-now-btn")?.addEventListener("click", async () => {
     showMsg("Please enter your delivery address.", "error"); return;
   }
 
-  // Get cart from localStorage
   const cart = getLocalCart();
   if (cart.length === 0) {
     showMsg("Your cart is empty. Add items before checking out.", "error"); return;
@@ -150,7 +201,6 @@ document.querySelector(".pay-now-btn")?.addEventListener("click", async () => {
   setPayLoading(true);
 
   try {
-    // Build items array from localStorage cart
     const items = cart.map(item => ({
       id:     String(item.id),
       name:   item.name,
@@ -160,13 +210,14 @@ document.querySelector(".pay-now-btn")?.addEventListener("click", async () => {
       weight: item.weight || ""
     }));
 
-    const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
-    const discount = appliedDiscount > 0 ? (subtotal * appliedDiscount / 100) : 0;
-    const total    = parseFloat((subtotal - discount).toFixed(2));
+    const subtotal    = items.reduce((s, i) => s + i.price * i.qty, 0);
+    const discountAmt = appliedDiscount > 0
+      ? parseFloat((subtotal * appliedDiscount / 100).toFixed(2))
+      : 0;
+    const total = parseFloat((subtotal - discountAmt).toFixed(2));
 
     const user = auth.currentUser;
 
-    // Build order object
     const order = {
       userId:        user?.uid || "guest",
       email,
@@ -176,7 +227,7 @@ document.querySelector(".pay-now-btn")?.addEventListener("click", async () => {
       items,
       subtotal:      parseFloat(subtotal.toFixed(2)),
       discountPct:   appliedDiscount,
-      discountAmt:   parseFloat(discount.toFixed(2)),
+      discountAmt,
       total,
       paymentMethod: payment,
       status:        "pending",
@@ -186,15 +237,21 @@ document.querySelector(".pay-now-btn")?.addEventListener("click", async () => {
     // Save to Firestore
     const orderRef = await addDoc(collection(db, "orders"), order);
 
-    // Clear localStorage cart after successful order
+    // Save to localStorage for delivery page (works without Firestore read rules)
+    localStorage.setItem("zadina_last_order", JSON.stringify({
+      ...order,
+      orderId:   orderRef.id,
+      createdAt: new Date().toISOString()
+    }));
+
+    // Clear cart
     localStorage.removeItem("zadina_cart");
 
-    // Redirect to confirmation page
+    // Redirect to confirmation
     window.location.href = `delivery.html?order=${orderRef.id}`;
 
   } catch (err) {
     console.error("Order error:", err.code, err.message);
-    // Show the actual error so it's debuggable
     showMsg(`Order failed: ${err.message || "Please try again."}`, "error");
     setPayLoading(false);
   }
